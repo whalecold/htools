@@ -188,13 +188,14 @@ class Executor(object):
             kind = ""
             parser = argparse.ArgumentParser()
             parser.add_argument('-c', help='input container name')
-            parser.add_argument('-e', help='the command sh/bash...')
+            parser.add_argument('-e', nargs="+", help='the command sh/bash...')
             args = parser.parse_args(option.raw)
             option.raw = []
             if args.c:
                 option.raw.extend(["-c", args.c])
             if args.e:
-                option.raw.extend(["-it", "--", args.e]) 
+                option.raw.extend(["-it", "--"]) 
+                option.raw.extend(args.e)
             else:
                 # default use bash
                 option.raw.extend(["-it", "--", "bash"]) 
