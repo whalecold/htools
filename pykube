@@ -11,6 +11,7 @@ import os
 import subprocess
 import sys
 import re
+import argparse
 
 KUBECTL_GET_TMPFILE="/tmp/hhl.kubectl_alias/get.tmpfile"
 """
@@ -185,9 +186,18 @@ class Executor(object):
             kind = ""
         elif action == "exec":
             kind = ""
-            if not option.raw:
-                option.raw = ["bash"]
-            option.raw = ["-it", "--"] + option.raw
+            parser = argparse.ArgumentParser()
+            parser.add_argument('-c', help='input container name')
+            parser.add_argument('-e', help='the command sh/bash...')
+            args = parser.parse_args(option.raw)
+            option.raw = []
+            if args.c:
+                option.raw.extend(["-c", args.c])
+            if args.e:
+                option.raw.extend(["-it", "--", args.e]) 
+            else:
+                # default use bash
+                option.raw.extend(["-it", "--", "bash"]) 
         elif action == "get":
             if kind == "pod" and not option.raw:
                 option = option.try_set_wide_for_pod(kind)
