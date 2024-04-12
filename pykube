@@ -184,6 +184,8 @@ class Executor(object):
 
         if action == "logs":
             kind = ""
+        elif action == "port-forward":
+            kind = ""
         elif action == "exec":
             kind = ""
             parser = argparse.ArgumentParser()

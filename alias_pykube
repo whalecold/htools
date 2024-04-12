@@ -66,6 +66,7 @@ EOF
 
     ## pod
     alias klp="_k_do logs pod"
+    alias kpf="_k_do port-forward pod"
     alias kx="_k_do exec pod"
 
     alias kfc="kubectl create -f"

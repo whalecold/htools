@@ -208,6 +208,9 @@ alias kec='_k_do edit configmap'
 ## log
 alias klp="_k_do logs pod"
 
+## port-forward
+alias kpf='_k_do port-forward pod'
+
 alias kx='_k_do exec pod'
 alias kfa="kubectl apply -f"
 alias kfc="kubectl create -f"
